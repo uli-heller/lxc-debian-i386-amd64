@@ -4,15 +4,6 @@ TODO
 Open
 ----
 
-### Debian - debconf: delaying package configuration, since apt-utils is not installed
-
-```
-2023-08-13 13:05:36 STDOUT Get:40 https://deb.debian.org/debian bookworm/main i386 libpam-cap i386 1:2.66-4 [14.7 kB]
-2023-08-13 13:05:37 STDERR debconf: delaying package configuration, since apt-utils is not installed
-2023-08-13 13:05:37 STDOUT Fetched 9639 kB in 3s (2899 kB/s)
-2023-08-13 13:05:37 STDOUT Selecting previously unselected package libargon2-1:i386.
-```
-
 ### /usr/sbin/debootstrap: 1609: cannot create /home/uli/git/github/uli-heller/lxc-debian-i386-amd64/bookworm-i386/rootfs/test-dev-null: Permission denied
 
 This error is probably caused by the mount options oh "/home":
@@ -115,4 +106,13 @@ deb http://deb.debian.org/debian-security bookworm-security contrib main non-fre
 2023-08-13 13:05:56 STDOUT Reading state information...
 2023-08-13 13:05:56 STDERR E: Unable to locate package language-pack-en-base
 2023-08-13 13:05:56 STDOUT Reading package lists...
+```
+
+### Debian - debconf: delaying package configuration, since apt-utils is not installed
+
+```
+2023-08-13 13:05:36 STDOUT Get:40 https://deb.debian.org/debian bookworm/main i386 libpam-cap i386 1:2.66-4 [14.7 kB]
+2023-08-13 13:05:37 STDERR debconf: delaying package configuration, since apt-utils is not installed
+2023-08-13 13:05:37 STDOUT Fetched 9639 kB in 3s (2899 kB/s)
+2023-08-13 13:05:37 STDOUT Selecting previously unselected package libargon2-1:i386.
 ```
