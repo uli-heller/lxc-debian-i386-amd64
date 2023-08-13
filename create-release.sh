@@ -24,7 +24,7 @@ mkdir -p "${TMPDIR}"
 HASH="$(git rev-parse HEAD)"
 TAG="$(git describe --tags "${HASH}")"
 TARXZ="${DBN}-${TAG}.tar.xz"
-VIRUSTOTAL_CHECK="$(which virustotal-check.sh 2>/dev/null)"
+#VIRUSTOTAL_CHECK="$(which virustotal-check.sh 2>/dev/null)"
 
 mkdir -p "${TMPDIR}/${DBN}-${TAG}"
 cp -a "${D}/." "${TMPDIR}/${DBN}-${TAG}/."
@@ -45,7 +45,12 @@ test -n "${VIRUSTOTAL_CHECK}" && "${VIRUSTOTAL_CHECK}" "${TARXZ}"
 
 ls -1 "${TARXZ}"*
 
-for r in bookworm jammy focal; do for a in amd64 i386; do ./create-image.sh -k -a ${a} ${r}; done; done
+for r in bookworm jammy focal; do
+    for a in amd64 i386; do
+	./create-image.sh -k -a ${a} ${r}
+	test -n "${VIRUSTOTAL_CHECK}" &&  "${VIRUSTOTAL_CHECK}" "${r}-${a}*lxcimage*xz"
+    done;
+done
 
 # Below, images not for general usage are created
 for r in bookworm jammy focal; do for a in amd64 i386; do ./create-image.sh -U -k -a ${a} ${r}; done; done
