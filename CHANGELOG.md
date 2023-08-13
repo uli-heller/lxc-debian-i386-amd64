@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+v2.0
+----
+
+- First version creating debian images, too
+
 v1.12
 ----
 
