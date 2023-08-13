@@ -35,12 +35,14 @@ cp -a "${D}/." "${TMPDIR}/${DBN}-${TAG}/."
     echo "${TAG}" >"VERSION"
 ) >/dev/null 2>&1
 (
+    echo "Creating '${TARXZ}'..."
     cd "${TMPDIR}"
     # --transform "s,^[.],${DBN}-${TAG},"
     tar --exclude '.git*' --exclude '*~' --exclude "${BN}" ${NO_VIRUS} -cf - "./${DBN}-${TAG}"
 )|xz -c9 >"${TARXZ}"
 sha256sum "${TARXZ}" >"${TARXZ}.sha256"
 sha1sum "${TARXZ}" >"${TARXZ}.sha1"
+echo "... completed"
 test -n "${VIRUSTOTAL_CHECK}" && "${VIRUSTOTAL_CHECK}" "${TARXZ}"
 
 ls -1 "${TARXZ}"*
