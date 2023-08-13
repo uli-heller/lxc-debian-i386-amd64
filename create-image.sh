@@ -84,6 +84,25 @@ OS="$1"
 OSDIR="$2"
 # OS=focal
 
+UBUNTU=
+DEBIAN=
+ADDITIONAL_SOURCES=
+ADDITIONAL_PACKAGES=
+case "${OS}" in
+    "focal"|"jammy")
+	UBUNTU=1
+	ADDITIONAL_SOURCES="restricted universe multiverse"
+	ADDITIONAL_REPOS="updates backports security"
+	ADDITIONAL_PACKAGES=
+	;;
+    "bookworm")
+	DEBIAN=1
+	ADDITIONAL_SOURCES="contrib non-free non-free-firmware"
+	ADDITIONAL_REPOS="updates backports security:-security"
+	ADDITIONAL_PACKAGES="apt-utils"
+	;;
+esac
+
 VERSION="$(cat "${D}"/VERSION 2>/dev/null)"
 test -z "${VERSION}" && VERSION="$(cd "${D}" && git describe --tags 2>/dev/null)"
 test -z "${VERSION}" && VERSION=HEAD
@@ -144,10 +163,19 @@ network:
             dhcp4: true
 EOF
 
-  sudo sed -i -e 's/$/ restricted universe multiverse/' "./${OSDIR}/rootfs/etc/apt/sources.list"
+  # ubuntu: restricted universe multiverse
+  # debian: contrib non-free non-free-firmware
+  sudo sed -i -e 's/$/ '"${ADDITIONAL_SOURCES}"'/' "./${OSDIR}/rootfs/etc/apt/sources.list"
   SOURCE_LINE="$(head -1 "./${OSDIR}/rootfs/etc/apt/sources.list")"
-  for r in updates backports security; do
-    echo "${SOURCE_LINE}"|sed -e "s/${OS} main/${OS}-${r} main/"|sudo tee -a "./${OSDIR}/rootfs/etc/apt/sources.list"
+  for ar in ${ADDITIONAL_REPOS}; do
+    r="$(echo "${ar}"|cut -d ":" -f 1)"
+    h="$(echo "${ar}"|cut -d ":" -f 2)"
+    NEW_SOURCE_LINE="${SOURCE_LINE}"
+    test -n "${h}" && {
+	NEW_SOURCE_LINE="$(echo "${NEW_SOURCE_LINE}"|sed -e "s,\(http[^ ]*\) ,\1${h} ,")"
+    }
+    NEW_SOURCE_LINE="$(echo "${NEW_SOURCE_LINE}"|sed -e "s/${OS} main/${OS}-${r} main/)"
+    echo "${NEW_SOURCE_LINE}"|sudo tee -a "./${OSDIR}/rootfs/etc/apt/sources.list"
   done
 
   sudo mkdir -p "${ROOTFS}/var/cache/lxc-ppa"
@@ -176,7 +204,7 @@ EOF
   #sudo chroot "./${OSDIR}/rootfs" apt-get install -y isc-dhcp-client                   # package not available?
   #sudo chroot "./${OSDIR}/rootfs" apt-get install -y isc-dhcp-common                   # package not available?
   #sudo chroot "./${OSDIR}/rootfs" apt-get install -y kbd                               # package not available?
-  sudo chroot "./${OSDIR}/rootfs" bash -c "DEBIAN_FRONTEND=noninteractive apt-get install -y keyboad-configuration"
+  sudo chroot "./${OSDIR}/rootfs" bash -c "DEBIAN_FRONTEND=noninteractive apt-get install -y keyboard-configuration"
   sudo chroot "./${OSDIR}/rootfs" apt-get install -y language-pack-en
   sudo chroot "./${OSDIR}/rootfs" apt-get install -y language-pack-en-base
   sudo chroot "./${OSDIR}/rootfs" apt-get install -y logrotate                          # probably already installed via debs/...

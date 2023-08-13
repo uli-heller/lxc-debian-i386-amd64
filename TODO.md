@@ -71,6 +71,14 @@ deb http://deb.debian.org/debian-security bookworm-security contrib main non-fre
 2023-08-13 13:05:56 STDOUT Reading package lists...
 ```
 
+### /usr/sbin/debootstrap: 1609: cannot create /home/uli/git/github/uli-heller/lxc-debian-i386-amd64/bookworm-i386/rootfs/test-dev-null: Permission denied
+
+This error is probably caused by the mount options oh "/home":
+
+```
+/dev/mapper/ubuntu--vg-homelv on /home type ext4 (rw,nosuid,nodev,relatime)
+```
+
 Done
 ----
 
