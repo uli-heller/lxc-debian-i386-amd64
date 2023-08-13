@@ -44,28 +44,28 @@ MODIFICATIONS_FOLDER=
 MODIFICATIONS_PREFIX=
 while getopts 'ha:kUp:m:' opt; do
     case $opt in
-	k)
-	    KEEP=y
-	    ;;
-	a)
-	    ARCHITECTURE="${OPTARG}"
-	    ;;
-	p)
-	    MODIFICATIONS_PREFIX="${OPTARG}"
-	    ;;
-	m)
-	    MODIFICATIONS_FOLDER="${OPTARG}"
-	    ;;
-	U)
-	    MODIFICATIONS_FOLDER="${D}/uli-modifications"
-	    MODIFICATIONS_PREFIX="uli"
-	    ;;
-	h)
-	    HELP=y
-	    ;;
-	*)
-	    USAGE=y
-	    ;;
+        k)
+            KEEP=y
+            ;;
+        a)
+            ARCHITECTURE="${OPTARG}"
+            ;;
+        p)
+            MODIFICATIONS_PREFIX="${OPTARG}"
+            ;;
+        m)
+            MODIFICATIONS_FOLDER="${OPTARG}"
+            ;;
+        U)
+            MODIFICATIONS_FOLDER="${D}/uli-modifications"
+            MODIFICATIONS_PREFIX="uli"
+            ;;
+        h)
+            HELP=y
+            ;;
+        *)
+            USAGE=y
+            ;;
     esac
 done
 shift "$(expr "${OPTIND}" - 1)"
@@ -90,17 +90,17 @@ ADDITIONAL_SOURCES=
 ADDITIONAL_PACKAGES=
 case "${OS}" in
     "focal"|"jammy")
-	UBUNTU=1
-	ADDITIONAL_SOURCES="restricted universe multiverse"
-	ADDITIONAL_REPOS="updates backports security"
-	ADDITIONAL_PACKAGES=
-	;;
+        UBUNTU=1
+        ADDITIONAL_SOURCES="restricted universe multiverse"
+        ADDITIONAL_REPOS="updates: backports: security:"
+        ADDITIONAL_PACKAGES=
+        ;;
     "bookworm")
-	DEBIAN=1
-	ADDITIONAL_SOURCES="contrib non-free non-free-firmware"
-	ADDITIONAL_REPOS="updates backports security:-security"
-	ADDITIONAL_PACKAGES="apt-utils"
-	;;
+        DEBIAN=1
+        ADDITIONAL_SOURCES="contrib non-free non-free-firmware"
+        ADDITIONAL_REPOS="updates: backports: security:-security"
+        ADDITIONAL_PACKAGES="apt-utils"
+        ;;
 esac
 
 VERSION="$(cat "${D}"/VERSION 2>/dev/null)"
@@ -115,7 +115,7 @@ sudo true
 RC=0
 cleanUp () {
     sudo -n true 2>/dev/null && {
-	sudo "${D}/umount.sh" "./${OSDIR}/rootfs" 2>/dev/null
+        sudo "${D}/umount.sh" "./${OSDIR}/rootfs" 2>/dev/null
     }
     exit "$RC"
 }
@@ -124,18 +124,18 @@ trap cleanUp 0 1 2 3 4 5 6 7 8 9 10 12 13 14 15
 
 case "${ARCHITECTURE}" in
     i686)
-	DEBOOTSTRAP_ARCHITECTURE=i386
-	;;
+        DEBOOTSTRAP_ARCHITECTURE=i386
+        ;;
     x86_64)
-	DEBOOTSTRAP_ARCHITECTURE=amd64
-	;;
+        DEBOOTSTRAP_ARCHITECTURE=amd64
+        ;;
     i386|amd64)
-	DEBOOTSTRAP_ARCHITECTURE="${ARCHITECTURE}"
-	;;
+        DEBOOTSTRAP_ARCHITECTURE="${ARCHITECTURE}"
+        ;;
     *)
-	usage >&2
-	exit 1
-	;;
+        usage >&2
+        exit 1
+        ;;
 esac
 
 test -z "${OSDIR}" && OSDIR="${OS}-${DEBOOTSTRAP_ARCHITECTURE}"
@@ -172,7 +172,7 @@ EOF
     h="$(echo "${ar}"|cut -d ":" -f 2)"
     NEW_SOURCE_LINE="${SOURCE_LINE}"
     test -n "${h}" && {
-	NEW_SOURCE_LINE="$(echo "${NEW_SOURCE_LINE}"|sed -e "s,\(http[^ ]*\) ,\1${h} ,")"
+        NEW_SOURCE_LINE="$(echo "${NEW_SOURCE_LINE}"|sed -e "s,\(http[^ ]*\) ,\1${h} ,")"
     }
     NEW_SOURCE_LINE="$(echo "${NEW_SOURCE_LINE}"|sed -e "s/${OS} main/${OS}-${r} main/")"
     echo "${NEW_SOURCE_LINE}"|sudo tee -a "./${OSDIR}/rootfs/etc/apt/sources.list"
@@ -181,7 +181,7 @@ EOF
   sudo mkdir -p "${ROOTFS}/var/cache/lxc-ppa"
   sudo cp "${D}/debs/${OS}/${DEBOOTSTRAP_ARCHITECTURE}"/*  "${ROOTFS}/var/cache/lxc-ppa" 2>/dev/null && {
       sudo cp "${D}/debs/${OS}/${DEBOOTSTRAP_ARCHITECTURE}"/lxc.public.gpg "${ROOTFS}/etc/apt/trusted.gpg.d/." 2>/dev/null && {
-	  echo "deb file:/var/cache/lxc-ppa/ ./"|sudo tee "${ROOTFS}/etc/apt/sources.list.d/lxc-ppa.list"
+          echo "deb file:/var/cache/lxc-ppa/ ./"|sudo tee "${ROOTFS}/etc/apt/sources.list.d/lxc-ppa.list"
       }
   }
 
@@ -305,17 +305,17 @@ log_command () {
 PROMPT_COMMAND="${PROMPT_COMMAND:-true};log_command"
 EOF
     for f in /etc/skel/.bashrc /root/.bashrc /home/ubuntu/.bashrc; do
-	test -e "./${OSDIR}/rootfs/${f}" && {
-	    sudo chroot "./${OSDIR}/rootfs" sed -i 's/^\(HISTSIZE\|HISTFILESIZE\)/#\1/' "${f}"
-	}
+        test -e "./${OSDIR}/rootfs/${f}" && {
+            sudo chroot "./${OSDIR}/rootfs" sed -i 's/^\(HISTSIZE\|HISTFILESIZE\)/#\1/' "${f}"
+        }
     done
 
 
     for u in root ubuntu; do
-	sudo chroot "./${OSDIR}/rootfs" sudo -u "${u}" -i /bin/sh -c "test -d .ssh || { mkdir .ssh; chmod 700 .ssh; touch .ssh/authorized_keys; chmod 600 .ssh/authorized_keys; }"
-	for p in "${MODIFICATIONS_FOLDER}/"*.pub; do
-	    sudo chroot "./${OSDIR}/rootfs" sudo -u "${u}" -i /bin/sh -c "cat >>.ssh/authorized_keys" <"${p}"
-	done
+        sudo chroot "./${OSDIR}/rootfs" sudo -u "${u}" -i /bin/sh -c "test -d .ssh || { mkdir .ssh; chmod 700 .ssh; touch .ssh/authorized_keys; chmod 600 .ssh/authorized_keys; }"
+        for p in "${MODIFICATIONS_FOLDER}/"*.pub; do
+            sudo chroot "./${OSDIR}/rootfs" sudo -u "${u}" -i /bin/sh -c "cat >>.ssh/authorized_keys" <"${p}"
+        done
     done
 }
 sudo ./umount.sh "./${OSDIR}/rootfs"
@@ -363,11 +363,11 @@ sudo chown root.root ./${OSDIR}/metadata.yaml
 
 mkdir -p "./${OSDIR}/templates"
 cat >"./${OSDIR}/templates/hosts.tpl" <<EOF
-127.0.1.1	{{ container.name }}
-127.0.0.1	localhost
-::1		localhost ip6-localhost ip6-loopback
-ff02::1		ip6-allnodes
-ff02::2		ip6-allrouters
+127.0.1.1       {{ container.name }}
+127.0.0.1       localhost
+::1             localhost ip6-localhost ip6-loopback
+ff02::1         ip6-allnodes
+ff02::2         ip6-allrouters
 EOF
 
 cat >"./${OSDIR}/templates/hostname.tpl" <<EOF
@@ -391,11 +391,11 @@ test -n "${PREFIX}" && {
 (
     cd "./${OSDIR}"
     sudo tar --numeric-owner \
-	 --exclude "rootfs/var/cache/lxc-ppa"\
-	 --exclude "rootfs/etc/apt/trusted.gpg.d/lxc.public.gpg"\
-	 --exclude "rootfs/etc/apt/sources.list.d/lxc-ppa.list"\
-	 --exclude "rootfs/var/cache/apt/archives"\
-	 -cpf - *
+         --exclude "rootfs/var/cache/lxc-ppa"\
+         --exclude "rootfs/etc/apt/trusted.gpg.d/lxc.public.gpg"\
+         --exclude "rootfs/etc/apt/sources.list.d/lxc-ppa.list"\
+         --exclude "rootfs/var/cache/apt/archives"\
+         -cpf - *
 )|xz -T0 -c9 >"${PREFIX}${OS}-${VERSION}-${DEBOOTSTRAP_ARCHITECTURE}-lxcimage.tar.xz"
 
 sudo rm -rf "./${OSDIR}"

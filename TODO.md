@@ -40,6 +40,16 @@ deb http://deb.debian.org/debian bookworm-backports contrib main non-free-firmwa
 deb http://deb.debian.org/debian-security bookworm-security contrib main non-free-firmware
 ```
 
+After doing some modifications, these errors remain:
+
+```
+2023-08-13 16:20:58 STDOUT Reading package lists...
+2023-08-13 16:20:58 STDERR E: The repository 'https://deb.debian.org/debianupdates bookworm-updates Release' does not have a Release file.
+2023-08-13 16:20:58 STDERR E: The repository 'https://deb.debian.org/debianbackports bookworm-backports Release' does not have a Release file.
+2023-08-13 16:20:58 STDOUT Reading package lists...
+```
+
+
 ### Debian - debconf: delaying package configuration, since apt-utils is not installed
 
 ```
