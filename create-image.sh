@@ -174,7 +174,7 @@ EOF
     test -n "${h}" && {
 	NEW_SOURCE_LINE="$(echo "${NEW_SOURCE_LINE}"|sed -e "s,\(http[^ ]*\) ,\1${h} ,")"
     }
-    NEW_SOURCE_LINE="$(echo "${NEW_SOURCE_LINE}"|sed -e "s/${OS} main/${OS}-${r} main/)"
+    NEW_SOURCE_LINE="$(echo "${NEW_SOURCE_LINE}"|sed -e "s/${OS} main/${OS}-${r} main/")"
     echo "${NEW_SOURCE_LINE}"|sudo tee -a "./${OSDIR}/rootfs/etc/apt/sources.list"
   done
 
