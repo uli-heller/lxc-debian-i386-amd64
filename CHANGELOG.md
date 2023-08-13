@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+v1.12
+----
+
+- Started work on debian
+
 v1.11
 -----
 - Use --numeric-owner for tar file creation
