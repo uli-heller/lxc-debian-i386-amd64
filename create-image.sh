@@ -88,16 +88,19 @@ UBUNTU=
 DEBIAN=
 ADDITIONAL_SOURCES=
 ADDITIONAL_REPOS=
+LANGUAGE_PACKS=
 case "${OS}" in
     "focal"|"jammy")
         UBUNTU=1
         ADDITIONAL_SOURCES="restricted universe multiverse"
         ADDITIONAL_REPOS="updates: backports: security:"
+	LANGUAGE_PACKS="language-pack-en language-pack-en-base"
         ;;
     "bookworm")
         DEBIAN=1
         ADDITIONAL_SOURCES="contrib non-free non-free-firmware"
         ADDITIONAL_REPOS="updates: backports: security:-security"
+	LANGUAGE_PACKS="locales locales-all"
         ;;
 esac
 
@@ -203,8 +206,7 @@ EOF
   #sudo chroot "./${OSDIR}/rootfs" apt-get install -y isc-dhcp-common                   # package not available?
   #sudo chroot "./${OSDIR}/rootfs" apt-get install -y kbd                               # package not available?
   sudo chroot "./${OSDIR}/rootfs" bash -c "DEBIAN_FRONTEND=noninteractive apt-get install -y keyboard-configuration"
-  sudo chroot "./${OSDIR}/rootfs" bash -c "DEBIAN_FRONTEND=noninteractive apt-get install -y language-pack-en"
-  sudo chroot "./${OSDIR}/rootfs" bash -c "DEBIAN_FRONTEND=noninteractive apt-get install -y language-pack-en-base"
+  sudo chroot "./${OSDIR}/rootfs" bash -c "DEBIAN_FRONTEND=noninteractive apt-get install -y ${LANGUAGE_PACKS}"
   sudo chroot "./${OSDIR}/rootfs" bash -c "DEBIAN_FRONTEND=noninteractive apt-get install -y logrotate"                          # probably already installed via debs/...
   sudo chroot "./${OSDIR}/rootfs" bash -c "DEBIAN_FRONTEND=noninteractive apt-get install -y netplan.io"                         # probably already installed via debs/...
   sudo chroot "./${OSDIR}/rootfs" bash -c "DEBIAN_FRONTEND=noninteractive apt-get install -y netbase"
