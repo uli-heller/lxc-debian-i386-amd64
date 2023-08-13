@@ -4,6 +4,15 @@ TODO
 Open
 ----
 
+### Debian Images Are Pretty Big
+
+Name                |Arch |Größe
+--------------------|-----|-----
+Ubuntu 22.04 (jammy)|amd64|110M 
+Ubuntu 22.04 (jammy)|i386 |90M  
+Debian 12 (bookworm)|amd64|123M 
+Debian 12 (bookworm)|i386 |124M 
+
 ### /usr/sbin/debootstrap: 1609: cannot create /home/uli/git/github/uli-heller/lxc-debian-i386-amd64/bookworm-i386/rootfs/test-dev-null: Permission denied
 
 This error is probably caused by the mount options oh "/home":
