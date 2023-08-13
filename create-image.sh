@@ -87,19 +87,17 @@ OSDIR="$2"
 UBUNTU=
 DEBIAN=
 ADDITIONAL_SOURCES=
-ADDITIONAL_PACKAGES=
+ADDITIONAL_REPOS=
 case "${OS}" in
     "focal"|"jammy")
         UBUNTU=1
         ADDITIONAL_SOURCES="restricted universe multiverse"
         ADDITIONAL_REPOS="updates: backports: security:"
-        ADDITIONAL_PACKAGES=
         ;;
     "bookworm")
         DEBIAN=1
         ADDITIONAL_SOURCES="contrib non-free non-free-firmware"
         ADDITIONAL_REPOS="updates: backports: security:-security"
-        ADDITIONAL_PACKAGES="apt-utils"
         ;;
 esac
 
@@ -188,32 +186,32 @@ EOF
   sudo ./mount.sh "./${OSDIR}/rootfs"
   sudo chroot "./${OSDIR}/rootfs" apt-get update
   sudo chroot "./${OSDIR}/rootfs" apt-get upgrade -y
-  sudo chroot "./${OSDIR}/rootfs" apt-get install -y systemd-sysv iproute2
-  sudo chroot "./${OSDIR}/rootfs" apt-get install -y apt-utils net-tools
-  sudo chroot "./${OSDIR}/rootfs" apt-get install -y ca-certificates libpsl5 openssl publicsuffix
-  sudo chroot "./${OSDIR}/rootfs" apt-get install -y less vim
+  sudo chroot "./${OSDIR}/rootfs" bash -c "DEBIAN_FRONTEND=noninteractive apt-get install -y systemd-sysv iproute2"
+  sudo chroot "./${OSDIR}/rootfs" bash -c "DEBIAN_FRONTEND=noninteractive apt-get install -y apt-utils net-tools"
+  sudo chroot "./${OSDIR}/rootfs" bash -c "DEBIAN_FRONTEND=noninteractive apt-get install -y ca-certificates libpsl5 openssl publicsuffix"
+  sudo chroot "./${OSDIR}/rootfs" bash -c "DEBIAN_FRONTEND=noninteractive apt-get install -y less vim"
   sudo chroot "./${OSDIR}/rootfs" bash -c "DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata"
-  sudo chroot "./${OSDIR}/rootfs" apt-get install -y apt-transport-https
+  sudo chroot "./${OSDIR}/rootfs" bash -c "DEBIAN_FRONTEND=noninteractive apt-get install -y apt-transport-https"
   #sudo chroot "./${OSDIR}/rootfs" apt-get install -y console-setup console-setup-linux # package not available?
-  sudo chroot "./${OSDIR}/rootfs" apt-get install -y cron
-  sudo chroot "./${OSDIR}/rootfs" apt-get install -y debconf-i18n
-  sudo chroot "./${OSDIR}/rootfs" apt-get install -y distro-info
-  sudo chroot "./${OSDIR}/rootfs" apt-get install -y fuse
-  sudo chroot "./${OSDIR}/rootfs" apt-get install -y init
+  sudo chroot "./${OSDIR}/rootfs" bash -c "DEBIAN_FRONTEND=noninteractive apt-get install -y cron"
+  sudo chroot "./${OSDIR}/rootfs" bash -c "DEBIAN_FRONTEND=noninteractive apt-get install -y debconf-i18n"
+  sudo chroot "./${OSDIR}/rootfs" bash -c "DEBIAN_FRONTEND=noninteractive apt-get install -y distro-info"
+  sudo chroot "./${OSDIR}/rootfs" bash -c "DEBIAN_FRONTEND=noninteractive apt-get install -y fuse"
+  sudo chroot "./${OSDIR}/rootfs" bash -c "DEBIAN_FRONTEND=noninteractive apt-get install -y init"
   #sudo chroot "./${OSDIR}/rootfs" apt-get install -y iputils-ping                      # package not available?
   #sudo chroot "./${OSDIR}/rootfs" apt-get install -y isc-dhcp-client                   # package not available?
   #sudo chroot "./${OSDIR}/rootfs" apt-get install -y isc-dhcp-common                   # package not available?
   #sudo chroot "./${OSDIR}/rootfs" apt-get install -y kbd                               # package not available?
   sudo chroot "./${OSDIR}/rootfs" bash -c "DEBIAN_FRONTEND=noninteractive apt-get install -y keyboard-configuration"
-  sudo chroot "./${OSDIR}/rootfs" apt-get install -y language-pack-en
-  sudo chroot "./${OSDIR}/rootfs" apt-get install -y language-pack-en-base
-  sudo chroot "./${OSDIR}/rootfs" apt-get install -y logrotate                          # probably already installed via debs/...
-  sudo chroot "./${OSDIR}/rootfs" apt-get install -y netplan.io                         # probably already installed via debs/...
-  sudo chroot "./${OSDIR}/rootfs" apt-get install -y netbase
+  sudo chroot "./${OSDIR}/rootfs" bash -c "DEBIAN_FRONTEND=noninteractive apt-get install -y language-pack-en"
+  sudo chroot "./${OSDIR}/rootfs" bash -c "DEBIAN_FRONTEND=noninteractive apt-get install -y language-pack-en-base"
+  sudo chroot "./${OSDIR}/rootfs" bash -c "DEBIAN_FRONTEND=noninteractive apt-get install -y logrotate"                          # probably already installed via debs/...
+  sudo chroot "./${OSDIR}/rootfs" bash -c "DEBIAN_FRONTEND=noninteractive apt-get install -y netplan.io"                         # probably already installed via debs/...
+  sudo chroot "./${OSDIR}/rootfs" bash -c "DEBIAN_FRONTEND=noninteractive apt-get install -y netbase"
   #sudo chroot "./${OSDIR}/rootfs" apt-get install -y rsyslog                           # package not available?
-  sudo chroot "./${OSDIR}/rootfs" apt-get install -y sudo
-  sudo chroot "./${OSDIR}/rootfs" apt-get install -y whiptail
-  sudo chroot "./${OSDIR}/rootfs" apt-get install -y openssh-server
+  sudo chroot "./${OSDIR}/rootfs" bash -c "DEBIAN_FRONTEND=noninteractive apt-get install -y sudo"
+  sudo chroot "./${OSDIR}/rootfs" bash -c "DEBIAN_FRONTEND=noninteractive apt-get install -y whiptail"
+  sudo chroot "./${OSDIR}/rootfs" bash -c "DEBIAN_FRONTEND=noninteractive apt-get install -y openssh-server"
 
   sudo mkdir -p "./${OSDIR}/rootfs/etc/sudoers.d"
   sudo tee  "./${OSDIR}/rootfs/etc/sudoers.d/90-lxd" >/dev/null <<EOF

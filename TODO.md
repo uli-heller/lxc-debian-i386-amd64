@@ -4,52 +4,6 @@ TODO
 Open
 ----
 
-### Debian - bookworm and 386
-
-```
-2023-08-13 13:05:31 STDOUT Get:10 https://deb.debian.org/debian bookworm-backports/main Translation-en [11.3 kB]
-2023-08-13 13:05:32 STDOUT Reading package lists...
-2023-08-13 13:05:32 STDERR E: The repository 'https://deb.debian.org/debian bookworm-security Release' does not have a Release file.
-2023-08-13 13:05:32 STDERR W: Skipping acquire of configured file 'restricted/binary-i386/Packages' as repository 'https://deb.debian.org/debian bookworm InRelease' doesn't have the component 'restricted' (component misspelt in sources.list?)
-2023-08-13 13:05:32 STDERR W: Skipping acquire of configured file 'restricted/i18n/Translation-en' as repository 'https://deb.debian.org/debian bookworm InRelease' doesn't have the component 'restricted' (component misspelt in sources.list?)
-2023-08-13 13:05:32 STDERR W: Skipping acquire of configured file 'universe/binary-i386/Packages' as repository 'https://deb.debian.org/debian bookworm InRelease' doesn't have the component 'universe' (component misspelt in sources.list?)
-2023-08-13 13:05:32 STDERR W: Skipping acquire of configured file 'universe/i18n/Translation-en' as repository 'https://deb.debian.org/debian bookworm InRelease' doesn't have the component 'universe' (component misspelt in sources.list?)
-2023-08-13 13:05:32 STDERR W: Skipping acquire of configured file 'multiverse/binary-i386/Packages' as repository 'https://deb.debian.org/debian bookworm InRelease' doesn't have the component 'multiverse' (component misspelt in sources.list?)
-2023-08-13 13:05:32 STDERR W: Skipping acquire of configured file 'multiverse/i18n/Translation-en' as repository 'https://deb.debian.org/debian bookworm InRelease' doesn't have the component 'multiverse' (component misspelt in sources.list?)
-2023-08-13 13:05:32 STDERR W: Skipping acquire of configured file 'restricted/binary-i386/Packages' as repository 'https://deb.debian.org/debian bookworm-updates InRelease' doesn't have the component 'restricted' (component misspelt in sources.list?)
-2023-08-13 13:05:32 STDERR W: Skipping acquire of configured file 'restricted/i18n/Translation-en' as repository 'https://deb.debian.org/debian bookworm-updates InRelease' doesn't have the component 'restricted' (component misspelt in sources.list?)
-2023-08-13 13:05:32 STDERR W: Skipping acquire of configured file 'universe/binary-i386/Packages' as repository 'https://deb.debian.org/debian bookworm-updates InRelease' doesn't have the component 'universe' (component misspelt in sources.list?)
-2023-08-13 13:05:32 STDERR W: Skipping acquire of configured file 'universe/i18n/Translation-en' as repository 'https://deb.debian.org/debian bookworm-updates InRelease' doesn't have the component 'universe' (component misspelt in sources.list?)
-2023-08-13 13:05:32 STDERR W: Skipping acquire of configured file 'multiverse/binary-i386/Packages' as repository 'https://deb.debian.org/debian bookworm-updates InRelease' doesn't have the component 'multiverse' (component misspelt in sources.list?)
-2023-08-13 13:05:32 STDERR W: Skipping acquire of configured file 'multiverse/i18n/Translation-en' as repository 'https://deb.debian.org/debian bookworm-updates InRelease' doesn't have the component 'multiverse' (component misspelt in sources.list?)
-2023-08-13 13:05:32 STDERR W: Skipping acquire of configured file 'restricted/binary-i386/Packages' as repository 'https://deb.debian.org/debian bookworm-backports InRelease' doesn't have the component 'restricted' (component misspelt in sources.list?)
-2023-08-13 13:05:32 STDERR W: Skipping acquire of configured file 'restricted/i18n/Translation-en' as repository 'https://deb.debian.org/debian bookworm-backports InRelease' doesn't have the component 'restricted' (component misspelt in sources.list?)
-2023-08-13 13:05:32 STDERR W: Skipping acquire of configured file 'universe/binary-i386/Packages' as repository 'https://deb.debian.org/debian bookworm-backports InRelease' doesn't have the component 'universe' (component misspelt in sources.list?)
-2023-08-13 13:05:32 STDERR W: Skipping acquire of configured file 'universe/i18n/Translation-en' as repository 'https://deb.debian.org/debian bookworm-backports InRelease' doesn't have the component 'universe' (component misspelt in sources.list?)
-2023-08-13 13:05:32 STDERR W: Skipping acquire of configured file 'multiverse/binary-i386/Packages' as repository 'https://deb.debian.org/debian bookworm-backports InRelease' doesn't have the component 'multiverse' (component misspelt in sources.list?)
-2023-08-13 13:05:32 STDERR W: Skipping acquire of configured file 'multiverse/i18n/Translation-en' as repository 'https://deb.debian.org/debian bookworm-backports InRelease' doesn't have the component 'multiverse' (component misspelt in sources.list?)
-2023-08-13 13:05:32 STDOUT Reading package lists...
-```
-
-... maybe use these sources:
-
-```
-deb http://deb.debian.org/debian bookworm contrib main non-free-firmware
-deb http://deb.debian.org/debian bookworm-updates contrib main non-free-firmware
-deb http://deb.debian.org/debian bookworm-backports contrib main non-free-firmware
-deb http://deb.debian.org/debian-security bookworm-security contrib main non-free-firmware
-```
-
-After doing some modifications, these errors remain:
-
-```
-2023-08-13 16:20:58 STDOUT Reading package lists...
-2023-08-13 16:20:58 STDERR E: The repository 'https://deb.debian.org/debianupdates bookworm-updates Release' does not have a Release file.
-2023-08-13 16:20:58 STDERR E: The repository 'https://deb.debian.org/debianbackports bookworm-backports Release' does not have a Release file.
-2023-08-13 16:20:58 STDOUT Reading package lists...
-```
-
-
 ### Debian - debconf: delaying package configuration, since apt-utils is not installed
 
 ```
@@ -126,3 +80,39 @@ Done
 - Skip already done steps
 - ssh pubkeys for the container (root and ubuntu)
 - /etc/ssh/sshd_config for the container
+
+### Debian - bookworm and 386
+
+```
+2023-08-13 13:05:31 STDOUT Get:10 https://deb.debian.org/debian bookworm-backports/main Translation-en [11.3 kB]
+2023-08-13 13:05:32 STDOUT Reading package lists...
+2023-08-13 13:05:32 STDERR E: The repository 'https://deb.debian.org/debian bookworm-security Release' does not have a Release file.
+2023-08-13 13:05:32 STDERR W: Skipping acquire of configured file 'restricted/binary-i386/Packages' as repository 'https://deb.debian.org/debian bookworm InRelease' doesn't have the component 'restricted' (component misspelt in sources.list?)
+2023-08-13 13:05:32 STDERR W: Skipping acquire of configured file 'restricted/i18n/Translation-en' as repository 'https://deb.debian.org/debian bookworm InRelease' doesn't have the component 'restricted' (component misspelt in sources.list?)
+2023-08-13 13:05:32 STDERR W: Skipping acquire of configured file 'universe/binary-i386/Packages' as repository 'https://deb.debian.org/debian bookworm InRelease' doesn't have the component 'universe' (component misspelt in sources.list?)
+2023-08-13 13:05:32 STDERR W: Skipping acquire of configured file 'universe/i18n/Translation-en' as repository 'https://deb.debian.org/debian bookworm InRelease' doesn't have the component 'universe' (component misspelt in sources.list?)
+2023-08-13 13:05:32 STDERR W: Skipping acquire of configured file 'multiverse/binary-i386/Packages' as repository 'https://deb.debian.org/debian bookworm InRelease' doesn't have the component 'multiverse' (component misspelt in sources.list?)
+2023-08-13 13:05:32 STDERR W: Skipping acquire of configured file 'multiverse/i18n/Translation-en' as repository 'https://deb.debian.org/debian bookworm InRelease' doesn't have the component 'multiverse' (component misspelt in sources.list?)
+2023-08-13 13:05:32 STDERR W: Skipping acquire of configured file 'restricted/binary-i386/Packages' as repository 'https://deb.debian.org/debian bookworm-updates InRelease' doesn't have the component 'restricted' (component misspelt in sources.list?)
+2023-08-13 13:05:32 STDERR W: Skipping acquire of configured file 'restricted/i18n/Translation-en' as repository 'https://deb.debian.org/debian bookworm-updates InRelease' doesn't have the component 'restricted' (component misspelt in sources.list?)
+2023-08-13 13:05:32 STDERR W: Skipping acquire of configured file 'universe/binary-i386/Packages' as repository 'https://deb.debian.org/debian bookworm-updates InRelease' doesn't have the component 'universe' (component misspelt in sources.list?)
+2023-08-13 13:05:32 STDERR W: Skipping acquire of configured file 'universe/i18n/Translation-en' as repository 'https://deb.debian.org/debian bookworm-updates InRelease' doesn't have the component 'universe' (component misspelt in sources.list?)
+2023-08-13 13:05:32 STDERR W: Skipping acquire of configured file 'multiverse/binary-i386/Packages' as repository 'https://deb.debian.org/debian bookworm-updates InRelease' doesn't have the component 'multiverse' (component misspelt in sources.list?)
+2023-08-13 13:05:32 STDERR W: Skipping acquire of configured file 'multiverse/i18n/Translation-en' as repository 'https://deb.debian.org/debian bookworm-updates InRelease' doesn't have the component 'multiverse' (component misspelt in sources.list?)
+2023-08-13 13:05:32 STDERR W: Skipping acquire of configured file 'restricted/binary-i386/Packages' as repository 'https://deb.debian.org/debian bookworm-backports InRelease' doesn't have the component 'restricted' (component misspelt in sources.list?)
+2023-08-13 13:05:32 STDERR W: Skipping acquire of configured file 'restricted/i18n/Translation-en' as repository 'https://deb.debian.org/debian bookworm-backports InRelease' doesn't have the component 'restricted' (component misspelt in sources.list?)
+2023-08-13 13:05:32 STDERR W: Skipping acquire of configured file 'universe/binary-i386/Packages' as repository 'https://deb.debian.org/debian bookworm-backports InRelease' doesn't have the component 'universe' (component misspelt in sources.list?)
+2023-08-13 13:05:32 STDERR W: Skipping acquire of configured file 'universe/i18n/Translation-en' as repository 'https://deb.debian.org/debian bookworm-backports InRelease' doesn't have the component 'universe' (component misspelt in sources.list?)
+2023-08-13 13:05:32 STDERR W: Skipping acquire of configured file 'multiverse/binary-i386/Packages' as repository 'https://deb.debian.org/debian bookworm-backports InRelease' doesn't have the component 'multiverse' (component misspelt in sources.list?)
+2023-08-13 13:05:32 STDERR W: Skipping acquire of configured file 'multiverse/i18n/Translation-en' as repository 'https://deb.debian.org/debian bookworm-backports InRelease' doesn't have the component 'multiverse' (component misspelt in sources.list?)
+2023-08-13 13:05:32 STDOUT Reading package lists...
+```
+
+... maybe use these sources:
+
+```
+deb http://deb.debian.org/debian bookworm contrib main non-free-firmware
+deb http://deb.debian.org/debian bookworm-updates contrib main non-free-firmware
+deb http://deb.debian.org/debian bookworm-backports contrib main non-free-firmware
+deb http://deb.debian.org/debian-security bookworm-security contrib main non-free-firmware
+```
