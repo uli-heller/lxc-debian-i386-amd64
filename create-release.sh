@@ -34,8 +34,8 @@ cp -a "${D}/." "${TMPDIR}/${DBN}-${TAG}/."
     rm -rf ".git*"
     echo "${TAG}" >"VERSION"
 ) >/dev/null 2>&1
+echo "Creating '${TARXZ}'..."
 (
-    echo "Creating '${TARXZ}'..."
     cd "${TMPDIR}"
     # --transform "s,^[.],${DBN}-${TAG},"
     tar --exclude '.git*' --exclude '*~' --exclude "${BN}" ${NO_VIRUS} -cf - "./${DBN}-${TAG}"
