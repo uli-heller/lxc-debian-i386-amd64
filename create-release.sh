@@ -24,6 +24,7 @@ mkdir -p "${TMPDIR}"
 HASH="$(git rev-parse HEAD)"
 TAG="$(git describe --tags "${HASH}")"
 TARXZ="${DBN}-${TAG}.tar.xz"
+VIRUSTOTAL_CHECK="$(which virustotal-check.sh 2>/dev/null)"
 
 mkdir -p "${TMPDIR}/${DBN}-${TAG}"
 cp -a "${D}/." "${TMPDIR}/${DBN}-${TAG}/."
@@ -40,6 +41,7 @@ cp -a "${D}/." "${TMPDIR}/${DBN}-${TAG}/."
 )|xz -c9 >"${TARXZ}"
 sha256sum "${TARXZ}" >"${TARXZ}.sha256"
 sha1sum "${TARXZ}" >"${TARXZ}.sha1"
+test -n "${VIRUSTOTAL_CHECK}" && "${VIRUSTOTAL_CHECK}" "${TARXZ}"
 
 ls -1 "${TARXZ}"*
 
