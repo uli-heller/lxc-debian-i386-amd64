@@ -13,28 +13,6 @@ Open
 2023-08-13 13:05:37 STDOUT Selecting previously unselected package libargon2-1:i386.
 ```
 
-### Debian - debconf: unable to initialize frontend: Dialog
-
-```
-2023-08-13 13:05:42 STDOUT Get:2 https://deb.debian.org/debian bookworm/main i386 publicsuffix all 20230209.2326-1 [126 kB]
-2023-08-13 13:05:42 STDERR debconf: unable to initialize frontend: Dialog
-2023-08-13 13:05:42 STDERR debconf: (No usable dialog-like program is installed, so the dialog based frontend cannot be used. at /usr/share/perl5/Debconf/FrontEnd/Dialog.pm line 78, <> line 2.)
-2023-08-13 13:05:42 STDERR debconf: falling back to frontend: Readline
-2023-08-13 13:05:42 STDOUT Fetched 186 kB in 0s (823 kB/s)
-```
-
-### Debian - Unable to locate package language-pack-en
-
-```
-2023-08-13 13:05:56 STDOUT Reading state information...
-2023-08-13 13:05:56 STDERR E: Unable to locate package language-pack-en
-2023-08-13 13:05:56 STDOUT Reading package lists...
-2023-08-13 13:05:56 STDOUT Building dependency tree...
-2023-08-13 13:05:56 STDOUT Reading state information...
-2023-08-13 13:05:56 STDERR E: Unable to locate package language-pack-en-base
-2023-08-13 13:05:56 STDOUT Reading package lists...
-```
-
 ### /usr/sbin/debootstrap: 1609: cannot create /home/uli/git/github/uli-heller/lxc-debian-i386-amd64/bookworm-i386/rootfs/test-dev-null: Permission denied
 
 This error is probably caused by the mount options oh "/home":
@@ -115,4 +93,26 @@ deb http://deb.debian.org/debian bookworm contrib main non-free-firmware
 deb http://deb.debian.org/debian bookworm-updates contrib main non-free-firmware
 deb http://deb.debian.org/debian bookworm-backports contrib main non-free-firmware
 deb http://deb.debian.org/debian-security bookworm-security contrib main non-free-firmware
+```
+
+### Debian - debconf: unable to initialize frontend: Dialog
+
+```
+2023-08-13 13:05:42 STDOUT Get:2 https://deb.debian.org/debian bookworm/main i386 publicsuffix all 20230209.2326-1 [126 kB]
+2023-08-13 13:05:42 STDERR debconf: unable to initialize frontend: Dialog
+2023-08-13 13:05:42 STDERR debconf: (No usable dialog-like program is installed, so the dialog based frontend cannot be used. at /usr/share/perl5/Debconf/FrontEnd/Dialog.pm line 78, <> line 2.)
+2023-08-13 13:05:42 STDERR debconf: falling back to frontend: Readline
+2023-08-13 13:05:42 STDOUT Fetched 186 kB in 0s (823 kB/s)
+```
+
+### Debian - Unable to locate package language-pack-en
+
+```
+2023-08-13 13:05:56 STDOUT Reading state information...
+2023-08-13 13:05:56 STDERR E: Unable to locate package language-pack-en
+2023-08-13 13:05:56 STDOUT Reading package lists...
+2023-08-13 13:05:56 STDOUT Building dependency tree...
+2023-08-13 13:05:56 STDOUT Reading state information...
+2023-08-13 13:05:56 STDERR E: Unable to locate package language-pack-en-base
+2023-08-13 13:05:56 STDOUT Reading package lists...
 ```

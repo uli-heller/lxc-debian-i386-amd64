@@ -144,12 +144,12 @@ test -z "${OSDIR}" && OSDIR="${OS}-${DEBOOTSTRAP_ARCHITECTURE}"
 test -e "${OS}-${DEBOOTSTRAP_ARCHITECTURE}-01-debootstrap-debs.tar.lz4" || {
   mkdir -p "./${OSDIR}"
   sudo mkdir -p "./${OSDIR}/rootfs"
-  sudo debootstrap --download-only "--arch=${DEBOOTSTRAP_ARCHITECTURE}" --variant=minbase "${OS}" "./${OSDIR}/rootfs"
+  sudo debootstrap --download-only "--arch=${DEBOOTSTRAP_ARCHITECTURE}" --variant=minbase --include=apt-utils "${OS}" "./${OSDIR}/rootfs"
   test -n "${KEEP}" && tar cf - "./${OSDIR}/rootfs" |lz4 -c >"${OS}-${DEBOOTSTRAP_ARCHITECTURE}-01-debootstrap-debs.tar.lz4"
 }
 
 test -e "${OS}-${DEBOOTSTRAP_ARCHITECTURE}-02-debootstrap-debootstrap.tar.lz4" || {
-  sudo debootstrap "--arch=${DEBOOTSTRAP_ARCHITECTURE}" --variant=minbase "${OS}" "./${OSDIR}/rootfs"
+  sudo debootstrap "--arch=${DEBOOTSTRAP_ARCHITECTURE}" --variant=minbase --include=apt-utils "${OS}" "./${OSDIR}/rootfs"
   test -n "${KEEP}" && sudo tar cf - "./${OSDIR}/rootfs" |lz4 -c >"${OS}-${DEBOOTSTRAP_ARCHITECTURE}-02-debootstrap-debootstrap.tar.lz4"
 }
 
@@ -190,7 +190,7 @@ EOF
   sudo chroot "./${OSDIR}/rootfs" apt-get update
   sudo chroot "./${OSDIR}/rootfs" apt-get upgrade -y
   sudo chroot "./${OSDIR}/rootfs" bash -c "DEBIAN_FRONTEND=noninteractive apt-get install -y systemd-sysv iproute2"
-  sudo chroot "./${OSDIR}/rootfs" bash -c "DEBIAN_FRONTEND=noninteractive apt-get install -y apt-utils net-tools"
+  sudo chroot "./${OSDIR}/rootfs" bash -c "DEBIAN_FRONTEND=noninteractive apt-get install -y net-tools"
   sudo chroot "./${OSDIR}/rootfs" bash -c "DEBIAN_FRONTEND=noninteractive apt-get install -y ca-certificates libpsl5 openssl publicsuffix"
   sudo chroot "./${OSDIR}/rootfs" bash -c "DEBIAN_FRONTEND=noninteractive apt-get install -y less vim"
   sudo chroot "./${OSDIR}/rootfs" bash -c "DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata"
