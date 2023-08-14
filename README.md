@@ -33,31 +33,37 @@ lxc launch focal-v16-i386 my-running-image
 
 ### Create All Container Images
 
-As of 2022-12-29, these are the container images:
+As of 2023-08-14, these are the container images:
 
-- jammy-v1.8-amd64-lxcimage.tar.xz ....... 64bit Ubuntu 22.04
-- jammy-v1.8-i386-lxcimage.tar.xz ........ 32bit Ubuntu 22.04
-- focal-v1.8-amd64-lxcimage.tar.xz ....... 64bit Ubuntu 20.04
-- focal-v1.8-i386-lxcimage.tar.xz ........ 32bit Ubuntu 20.04
+- bookworm-v2.0-amd64-lxcimage.tar.xz .... 64bit Debian 12
+- bookworm-v2.0-i386-lxcimage.tar.xz ..... 32bit Debian 12
+- jammy-v2.0-amd64-lxcimage.tar.xz ....... 64bit Ubuntu 22.04
+- jammy-v2.0-i386-lxcimage.tar.xz ........ 32bit Ubuntu 22.04
+- focal-v2.0-amd64-lxcimage.tar.xz ....... 64bit Ubuntu 20.04
+- focal-v2.0-i386-lxcimage.tar.xz ........ 32bit Ubuntu 20.04
 
 Special images, **not for general use**:
-- uli-jammy-v1.8-amd64-lxcimage.tar.xz ... 64bit Ubuntu 22.04 with Uli's preferences
-- uli-jammy-v1.8-i386-lxcimage.tar.xz .... 32bit Ubuntu 22.04 with Uli's preferences
-- uli-focal-v1.8-amd64-lxcimage.tar.xz ... 64bit Ubuntu 20.04 with Uli's preferences
-- uli-focal-v1.8-i386-lxcimage.tar.xz .... 32bit Ubuntu 20.04 with Uli's preferences
-- dp-jammy-v1.8-amd64-lxcimage.tar.xz ... 64bit Ubuntu 22.04 with Uli's other set of preferences
-- dp-jammy-v1.8-i386-lxcimage.tar.xz .... 32bit Ubuntu 22.04 with Uli's other set of preferences
-- dp-focal-v1.8-amd64-lxcimage.tar.xz ... 64bit Ubuntu 20.04 with Uli's other set of preferences
-- dp-focal-v1.8-i386-lxcimage.tar.xz .... 32bit Ubuntu 20.04 with Uli's other set of preferences
+- uli-bookworm-v2.0-amd64-lxcimage.tar.xz ... 64bit Debian 12 with Uli's preferences
+- uli-bookworm-v2.0-i386-lxcimage.tar.xz .... 32bit Debian 12 with Uli's preferences
+- uli-jammy-v2.0-amd64-lxcimage.tar.xz ...... 64bit Ubuntu 22.04 with Uli's preferences
+- uli-jammy-v2.0-i386-lxcimage.tar.xz ....... 32bit Ubuntu 22.04 with Uli's preferences
+- uli-focal-v2.0-amd64-lxcimage.tar.xz ...... 64bit Ubuntu 20.04 with Uli's preferences
+- uli-focal-v2.0-i386-lxcimage.tar.xz ....... 32bit Ubuntu 20.04 with Uli's preferences
+- dp-bookworm-v2.0-amd64-lxcimage.tar.xz .... 64bit Debian 12 with Uli's other set of preferences
+- dp-bookworm-v2.0-i386-lxcimage.tar.xz ..... 32bit Debian 12 with Uli's other set of preferences
+- dp-jammy-v2.0-amd64-lxcimage.tar.xz ....... 64bit Ubuntu 22.04 with Uli's other set of preferences
+- dp-jammy-v2.0-i386-lxcimage.tar.xz ........ 32bit Ubuntu 22.04 with Uli's other set of preferences
+- dp-focal-v2.0-amd64-lxcimage.tar.xz ....... 64bit Ubuntu 20.04 with Uli's other set of preferences
+- dp-focal-v2.0-i386-lxcimage.tar.xz ........ 32bit Ubuntu 20.04 with Uli's other set of preferences
 
-Execute all of them by executing:
+Build all of them by executing:
 
 ```
-for r in jammy focal; do for a in amd64 i386; do ./create-image.sh -k -a ${a} ${r}; done; done
+for r in bookworm jammy focal; do for a in amd64 i386; do ./create-image.sh -k -a ${a} ${r}; done; done
 
 # Below, images not for general usage are created
-for r in jammy focal; do for a in amd64 i386; do ./create-image.sh -U -k -a ${a} ${r}; done; done
-for r in jammy focal; do for a in amd64 i386; do ./create-image.sh -m dp-modifications -p dp -k -a ${a} ${r}; done; done
+for r in bookworm jammy focal; do for a in amd64 i386; do ./create-image.sh -U -k -a ${a} ${r}; done; done
+for r in bookworm jammy focal; do for a in amd64 i386; do ./create-image.sh -m dp-modifications -p dp -k -a ${a} ${r}; done; done
 ```
 
 Select Your Playground
