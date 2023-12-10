@@ -13,6 +13,9 @@ Ubuntu 22.04 (jammy)|i386 |90M
 Debian 12 (bookworm)|amd64|123M 
 Debian 12 (bookworm)|i386 |124M 
 
+Maybe look at the debian docker images to get some ideas on how to reduce the size?
+[bookworm/slim/rootfs.manifest](https://github.com/debuerreotype/docker-debian-artifacts/blob/1f1e36af44a355418661956f15e39f5b04b848b6/bookworm/slim/rootfs.manifest)
+
 ### /usr/sbin/debootstrap: 1609: cannot create /home/uli/git/github/uli-heller/lxc-debian-i386-amd64/bookworm-i386/rootfs/test-dev-null: Permission denied
 
 This error is probably caused by the mount options oh "/home":
