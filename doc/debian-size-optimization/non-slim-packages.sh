@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 # $1 ... bookworm-slim-rootfs.manifest
-# $2 ... debian-minimal.packages
+# $2 ... bookworm-minimal.packages
 #
 while read -r p r; do
   b="$(echo "${p}"|cut -d ":" -f 1)"
