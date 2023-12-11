@@ -68,15 +68,15 @@ Kandidaten zur Entfernung von "jammy":
 - libatm1
 - libdbus-1-3
 - libestr0
-- libexpat1
+- libexpat1 (*)
 - libicu70
-- libpcre3
-- libpython3-stdlib
-- libpython3.10-minimal
-- libpython3.10-stdlib
-- libsqlite3-0
+- libpcre3 (*)
+- libpython3-stdlib (*)
+- libpython3.10-minimal (*)
+- libpython3.10-stdlib (*)
+- libsqlite3-0 (*)
 - locales
-- lsb-base
-- lsb-release
-- media-types
+- lsb-base (*)
+- lsb-release (*)
+- media-types (*)
 - netcat-openbsd
