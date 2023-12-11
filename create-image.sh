@@ -144,7 +144,7 @@ test -z "${OSDIR}" && OSDIR="${OS}-${DEBOOTSTRAP_ARCHITECTURE}"
 test -e "${OS}-${DEBOOTSTRAP_ARCHITECTURE}-01-debootstrap-debs.tar.lz4" || {
   mkdir -p "./${OSDIR}"
   sudo mkdir -p "./${OSDIR}/rootfs"
-  sudo debootstrap --download-only "--arch=${DEBOOTSTRAP_ARCHITECTURE}" --variant=minbase --include=apt-utils "${OS}" "./${OSDIR}/rootfs"
+  sudo debootstrap --download-only "--arch=${DEBOOTSTRAP_ARCHITECTURE}" --variant=minbase -exclude="$(cat exclude-packages|tr "\n" ",")" --include=apt-utils "${OS}" "./${OSDIR}/rootfs"
   test -n "${KEEP}" && tar cf - "./${OSDIR}/rootfs" |lz4 -c >"${OS}-${DEBOOTSTRAP_ARCHITECTURE}-01-debootstrap-debs.tar.lz4"
 }
 
